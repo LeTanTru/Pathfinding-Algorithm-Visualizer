@@ -171,6 +171,7 @@
     font-size: 16px;
     line-height: 1;
     font-family: var(--font-be-vietnam-pro);
+    background-color: #242424;
   }
 
   ::-webkit-scrollbar-button {
@@ -204,5 +205,67 @@
   ::-moz-scrollbar-thumb {
     border-radius: 50px;
     background-color: #6a3892;
+  }
+
+  .animate-wall {
+    animation: animate-wall 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-traversed {
+    animation: animate-traversed 0.5s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .animate-path {
+    animation: animate-path 1.5s cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes animate-wall {
+  0% {
+    transform: scale(0.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes animate-traversed {
+  0% {
+    transform: scale(0.3);
+    background-color: #9333eabf;
+    border-radius: 100%;
+  }
+  50% {
+    background-color: #4f46e5bf;
+  }
+  75% {
+    transform: scale(1.2);
+    background-color: #3b82f6bf;
+  }
+  100% {
+    transform: scale(1);
+    background-color: #22d3ee;
+  }
+}
+
+@keyframes animate-path {
+  0% {
+    transform: scale(0.3);
+    background-color: #e11d48bf;
+    border-radius: 100%;
+  }
+  50% {
+    background-color: #ea580cbf;
+  }
+  75% {
+    transform: scale(1.2);
+    background-color: #fb923cbf;
+  }
+  90% {
+    transform: scale(0.8);
+    background-color: #fde68a;
+  }
+  100% {
+    transform: scale(1);
   }
 }

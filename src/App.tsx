@@ -1,11 +1,24 @@
-import Button from '@/components/Button';
+import { Grid, Nav } from '@/components';
+import { PathFindingProvider, SpeedProvider, TileProvider } from '@/context';
+import { useRef } from 'react';
 
 const App = () => {
+  const isVisualizeRunningRef = useRef<boolean>(false);
+
   return (
-    <div>
-      <Button />
-    </div>
+    <PathFindingProvider>
+      <TileProvider>
+        <SpeedProvider>
+          <div className='flex h-screen w-screen flex-col'>
+            <Nav isVisualizeRunningRef={isVisualizeRunningRef} />
+            <Grid isVisualizeRunningRef={isVisualizeRunningRef} />
+          </div>
+        </SpeedProvider>
+      </TileProvider>
+    </PathFindingProvider>
   );
 };
 
 export default App;
+
+// https://youtu.be/fLpvgCVYjTo?t=8297
