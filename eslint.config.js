@@ -25,8 +25,7 @@ export default defineConfig([
     },
     plugins: {
       react,
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh
+      'react-hooks': reactHooks
     },
     settings: {
       react: { version: 'detect' }
