@@ -7,12 +7,15 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import react from 'eslint-plugin-react';
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'node_modules', '*.config.js']),
+
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
+      react.configs.flat.recommended,
+      react.configs.flat['jsx-runtime'],
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite
     ],
@@ -22,38 +25,63 @@ export default defineConfig([
     },
     plugins: {
       react,
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh
+      'react-hooks': reactHooks
+    },
+    settings: {
+      react: { version: 'detect' }
     },
     rules: {
-      ...js.configs.recommended.rules,
-      ...react.configs.recommended.rules,
-      ...react.configs['jsx-runtime'].rules,
-      ...reactHooks.configs.recommended.rules,
-      'react/jsx-no-target-blank': 'off',
+      // ─── TypeScript ───────────────────────────────────────────
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_'
+        }
+      ],
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
+      '@typescript-eslint/no-empty-object-type': 'warn',
+      '@typescript-eslint/no-require-imports': 'warn',
+      '@typescript-eslint/consistent-type-imports': [
+        'warn',
+        { prefer: 'type-imports', fixStyle: 'inline-type-imports' }
+      ],
+
+      // ─── React ────────────────────────────────────────────────
+      'react/prop-types': 'off',
+      'react/display-name': 'off',
+      'react/jsx-no-target-blank': 'error',
+      'react/jsx-no-duplicate-props': 'error',
+      'react/jsx-no-useless-fragment': 'warn',
+      'react/self-closing-comp': 'warn',
+      'react/no-array-index-key': 'warn',
+      'react/no-unstable-nested-components': 'warn',
+
+      // ─── React Hooks ──────────────────────────────────────────
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+
+      // ─── React Refresh ────────────────────────────────────────
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true }
       ],
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn',
-      'react/prop-types': 0,
-      'react/display-name': 0,
+
+      // ─── Code quality ─────────────────────────────────────────
       'no-console': 'warn',
-      'no-unused-vars': 'warn',
-      'no-multi-spaces': 1,
-      'no-multiple-empty-lines': 1,
-      'space-before-blocks': ['error', 'always'],
-      'object-curly-spacing': [1, 'always'],
-      indent: ['warn', 2],
-      quotes: ['warn', 'single'],
-      'array-bracket-spacing': 1,
-      'linebreak-style': 0,
+      'no-debugger': 'warn',
+      'no-duplicate-imports': 'warn',
+      'no-multiple-empty-lines': ['warn', { max: 1, maxEOF: 0 }],
       'no-unexpected-multiline': 'warn',
-      'keyword-spacing': 1,
-      'comma-dangle': 1,
-      'comma-spacing': 1,
-      'arrow-spacing': 1
+      'no-multi-spaces': 'warn',
+      'prefer-const': 'warn',
+      'no-var': 'error',
+      eqeqeq: ['warn', 'always'],
+      'no-empty': 'warn',
+      'no-empty-function': 'off'
     }
   }
 ]);
