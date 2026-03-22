@@ -1,75 +1,58 @@
-# React + TypeScript + Vite
+# Pathfinding Algorithm Visualization
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive React + TypeScript app for visualizing graph pathfinding and maze generation algorithms on a grid.
 
-Currently, two official plugins are available:
+## What this project does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This visualizer lets you:
 
-## React Compiler
+- Draw walls directly on the grid with mouse drag.
+- Generate mazes using:
+  - Binary Tree
+  - Recursive Division
+- Run and animate pathfinding algorithms:
+  - Depth-First Search (DFS)
+  - Breadth-First Search (BFS)
+  - Dijkstra
+  - A\* Search
+- Control animation speed (`Slow`, `Medium`, `Fast`).
+- Reset/re-run visualizations from the same UI.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Tech stack
 
-Note: This will impact Vite dev & build performances.
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
 
-## Expanding the ESLint configuration
+## Run locally
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open the local Vite URL shown in your terminal (typically `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Available scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev       # Start development server
+npm run build     # Type-check and build for production
+npm run preview   # Preview production build
+npm run lint      # Run ESLint
+npm run format    # Run Prettier
 ```
+
+## Project structure (high level)
+
+- `src/components` - UI controls and grid rendering.
+- `src/libs/algorithm/pathfinding` - Pathfinding algorithm implementations.
+- `src/libs/algorithm/maze` - Maze generation implementations.
+- `src/utils` - Animation helpers, grid helpers, and algorithm runners.
+- `src/context` + `src/hooks` - Shared state for grid, speed, and selected algorithms.
+
+## Notes
+
+- Grid size is currently configured to `39 x 49` tiles.
+- Start and end tiles are fixed by default and excluded from wall generation.

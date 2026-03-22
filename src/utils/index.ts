@@ -4,6 +4,7 @@ export * from './createWall';
 export * from './destroyWall';
 export * from './getUntraversedNeighbors';
 export * from './helper';
+export * from './heuristics';
 export * from './resetGrid';
 export * from './runMazeAlgorithm';
 export * from './runPathFindingAlgorithm';
