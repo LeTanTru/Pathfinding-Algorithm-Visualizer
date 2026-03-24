@@ -7,6 +7,7 @@ export const constructBorder = async (
   startTile: TileType,
   endTile: TileType
 ) => {
+  // 4 tiles around current tile
   const shape = [
     { row: 0, col: 1 },
     { row: 1, col: 0 },
@@ -20,6 +21,7 @@ export const constructBorder = async (
   for (let i = 0; i < 4; i++) {
     const direction = shape[i];
 
+    // while 1 of 4 tiles around exists
     while (
       row + direction.row >= 0 &&
       row + direction.row < MAX_ROWS &&
@@ -29,13 +31,16 @@ export const constructBorder = async (
       row += direction.row;
       col += direction.col;
 
+      // if current tile is not startTile and endTile
       if (
         !isEqual(grid[row][col], startTile) &&
         !isEqual(grid[row][col], endTile)
       ) {
+        // make wall
         grid[row][col].isWall = true;
         const tileElement = document.getElementById(`${row}-${col}`);
         if (tileElement) {
+          // make animation
           tileElement.classList.add(
             ...WALL_TILE_STYLE.split(' '),
             'animate-wall'

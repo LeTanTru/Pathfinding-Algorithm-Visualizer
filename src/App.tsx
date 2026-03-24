@@ -2,8 +2,6 @@ import { Grid, Nav } from '@/components';
 import { PathFindingProvider, SpeedProvider, TileProvider } from '@/context';
 import { useRef } from 'react';
 
-// https://youtu.be/fLpvgCVYjTo?t=8297
-
 const App = () => {
   const isVisualizeRunningRef = useRef<boolean>(false);
 
