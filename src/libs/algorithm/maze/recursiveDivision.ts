@@ -25,6 +25,7 @@ export const recursiveDivision = async ({
 }) => {
   if (height <= 1 || width <= 1) return;
 
+  // Recurse on the longer axis to maintain balanced subdivisions
   if (height > width) {
     await horizontalDivision({
       grid,

@@ -2,6 +2,7 @@ import { MAX_COLS, MAX_ROWS, SPEEDS, WALL_TILE_STYLE } from '@/constants';
 import type { SpeedType, TileType } from '@/types';
 import { isRowColEqual } from '@/utils/helper';
 
+// Create wall animation
 export const createWall = (
   startTile: TileType,
   endTile: TileType,
@@ -13,11 +14,14 @@ export const createWall = (
     setTimeout(
       () => {
         for (let col = 0; col < MAX_COLS; col++) {
+          // If row or col is even
           if (row % 2 === 0 || col % 2 === 0) {
+            // If not start or end tile
             if (
               !isRowColEqual(row, col, startTile) &&
               !isRowColEqual(row, col, endTile)
             ) {
+              // Add wall animation
               setTimeout(() => {
                 document.getElementById(`${row}-${col}`)!.className =
                   `${WALL_TILE_STYLE} animate-wall`;
